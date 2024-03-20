@@ -1,6 +1,9 @@
 import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { PasswordTransformer } from '../password.transformer';
 
-@Entity()
+@Entity({
+  name: 'users',
+})
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
@@ -11,6 +14,9 @@ export class User {
   @Column()
   email: string;
 
-  @Column()
+  @Column({
+    name: 'password',
+    transformer: new PasswordTransformer(),
+  })
   password: string;
 }
